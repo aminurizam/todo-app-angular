@@ -26,7 +26,7 @@
 		</form>
 		<div
 			*ngIf="todo.invalid && (todo.dirty || todo.touched)"
-			class="alert alert-danger"
+			class="-mt-2 bg-red-300 rounded px-2.5 py-2 font-medium text-red-900"
 		>
 			<div *ngIf="todo.errors?.duplicate">Duplicate Todo Found!</div>
 			<div *ngIf="todo.errors?.required">Todo cannot be empty!</div>
@@ -48,7 +48,7 @@
 				<div class="flex-shrink-0">
 					<button
 						(click)="update(i)"
-						class="p-2 text-green-500 border rounded mr-2"
+						class="p-2 text-green-500 border rounded mr-2 hover:bg-green-400 hover:text-white hover:border-green-400"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +65,7 @@
 					</button>
 					<button
 						(click)="delete(i)"
-						class="p-2 text-red-500 border rounded"
+						class="p-2 text-red-500 border rounded hover:bg-red-400 hover:text-white hover:border-red-400"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -99,15 +99,5 @@
 				>{{ percentageCompleted }}% done!</label
 			>
 		</div>
-
-		<!-- <input type="text" [formControl]="title" name="title" id="title" />
-		<p>{{ title.value }}</p>
-		<p>{{ title.status }}</p>
-		<div
-			*ngIf="title.invalid && (title.dirty || title.touched)"
-			class="alert alert-danger"
-		>
-			<div *ngIf="title.errors?.required">Name is required.</div>
-		</div> -->
 	</div>
 </div>
