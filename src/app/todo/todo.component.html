@@ -1,0 +1,113 @@
+<div class="todos flex flex-col h-screen items-center justify-center">
+	<h1 class="text-3xl uppercase font-semibold">todo app</h1>
+	<div class="sm:w-4/12 w-full">
+		<form #todoForm="ngForm" (submit)="addTodo()" class="flex mb-6">
+			<input
+				type="text"
+				placeholder="What needs to be done?"
+				[formControl]="todo"
+				name="todo"
+				id="todo"
+				class="px-2.5 py-2 border mr-4 w-full"
+			/>
+			<button
+				type="submit"
+				class="
+					px-3
+					py-2
+					bg-green-500
+					hover:bg-green-600
+					text-white
+					rounded
+				"
+			>
+				Add
+			</button>
+		</form>
+		<div
+			*ngIf="todo.invalid && (todo.dirty || todo.touched)"
+			class="alert alert-danger"
+		>
+			<div *ngIf="todo.errors?.duplicate">Duplicate Todo Found!</div>
+			<div *ngIf="todo.errors?.required">Todo cannot be empty!</div>
+		</div>
+		<ul
+			cdkDropList
+			class="example-list"
+			(cdkDropListDropped)="drop($event)"
+		>
+			<li
+				*ngFor="let todo of todos; let i = index"
+				class="{{ todo.completed ? 'strikethrough' : '' }}"
+				cdkDrag
+				class="my-2 flex items-center cursor-move"
+			>
+				<div class="w-full">
+					<label for="" class="mr-4 cursor-move">{{ todo.title }}</label>
+				</div>
+				<div class="flex-shrink-0">
+					<button
+						(click)="update(i)"
+						class="p-2 text-green-500 border rounded mr-2"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="w-4 h-auto"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<polyline points="20 6 9 17 4 12"></polyline>
+						</svg>
+					</button>
+					<button
+						(click)="delete(i)"
+						class="p-2 text-red-500 border rounded"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="w-4 h-auto"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<polyline points="3 6 5 6 21 6"></polyline>
+							<path
+								d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+							></path>
+							<line x1="10" y1="11" x2="10" y2="17"></line>
+							<line x1="14" y1="11" x2="14" y2="17"></line>
+						</svg>
+					</button>
+				</div>
+			</li>
+		</ul>
+		<div class="flex items-center" *ngIf="showPercentage">
+			<mat-progress-bar
+				mode="determinate"
+				value="{{ percentageCompleted }}"
+				class="mr-2"
+				>asd</mat-progress-bar
+			>
+			<label for="" class="flex-shrink-0"
+				>{{ percentageCompleted }}% done!</label
+			>
+		</div>
+
+		<!-- <input type="text" [formControl]="title" name="title" id="title" />
+		<p>{{ title.value }}</p>
+		<p>{{ title.status }}</p>
+		<div
+			*ngIf="title.invalid && (title.dirty || title.touched)"
+			class="alert alert-danger"
+		>
+			<div *ngIf="title.errors?.required">Name is required.</div>
+		</div> -->
+	</div>
+</div>
